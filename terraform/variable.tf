@@ -4,12 +4,6 @@ variable "vpc_cidr_block" {
   //default     = "10.0.0.0/16"
 }
 
-variable "subnet_cidr_block" {
-  type        = string
-  description = "CIDR for subnet"
-  //default     = "10.0.1.0/24"
-}
-
 variable "open_cidr_block" {
   type        = string
   description = "open cidr block"
@@ -23,4 +17,9 @@ variable "profile" {
 variable "region" {
   type        = string
   description = "region name"
+}
+
+variable "subnet_region_cidr_block" {
+  type        = map
+  description = "subnet region cidr block "
 }

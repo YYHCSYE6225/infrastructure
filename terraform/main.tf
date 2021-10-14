@@ -1,10 +1,10 @@
-locals {
-  subnet_az_cidr = {
-    "us-east-1a" = "10.0.2.0/24",
-    "us-east-1b" = "10.0.3.0/24",
-    "us-east-1c" = "10.0.4.0/24",
-  }
-}
+# locals {
+#   subnet_az_cidr = {
+#     "us-east-1a" = "10.0.2.0/24",
+#     "us-east-1b" = "10.0.3.0/24",
+#     "us-east-1c" = "10.0.4.0/24",
+#   }
+# }
 resource "aws_vpc" "vpc" {
   cidr_block                       = var.vpc_cidr_block
   enable_dns_support               = true
@@ -20,7 +20,7 @@ resource "aws_subnet" "subnet" {
 
   depends_on = [aws_vpc.vpc]
 
-  for_each = local.subnet_az_cidr
+  for_each = var.subnet_region_cidr_block
 
   cidr_block              = each.value
   vpc_id                  = aws_vpc.vpc.id
@@ -67,7 +67,7 @@ resource "aws_route_table" "routeTable" {
 }
 
 resource "aws_route_table_association" "ats" {
-    for_each = local.subnet_az_cidr
+    for_each = var.subnet_region_cidr_block
   subnet_id      = aws_subnet.subnet[each.key].id
   route_table_id = aws_route_table.routeTable.id
 }
