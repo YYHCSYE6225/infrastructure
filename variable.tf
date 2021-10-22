@@ -20,6 +20,11 @@ variable "region" {
 }
 
 variable "subnet_region_cidr_block" {
-  type        = map
+  type        = map(any)
   description = "subnet region cidr block "
+}
+
+variable "open_ipv6_cidr_block" {
+  type        = string
+  description = "open cidr block"
 }
