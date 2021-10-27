@@ -67,17 +67,18 @@ resource "aws_route_table" "routeTable" {
 }
 
 resource "aws_route_table_association" "ats" {
-    for_each = var.subnet_region_cidr_block
+  for_each       = var.subnet_region_cidr_block
   subnet_id      = aws_subnet.subnet[each.key].id
   route_table_id = aws_route_table.routeTable.id
+
 }
 
-# resource "aws_route_table_association" "b" {
-#   subnet_id      = aws_subnet.subnet.id["1"]
-#   route_table_id = aws_route_table.routeTable.id
-# }
+resource "aws_db_subnet_group" "subnet_group" {
+  name = "db_subnet_group"
 
-# resource "aws_route_table_association" "c" {
-#   subnet_id      = aws_subnet.subnet.id["2"]
-#   route_table_id = aws_route_table.routeTable.id
-# }
+  subnet_ids = [for s in aws_subnet.subnet : s.id]
+
+  tags = {
+    Name = "DB subnet group"
+  }
+}
