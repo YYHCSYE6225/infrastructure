@@ -12,15 +12,17 @@ resource "aws_instance" "ec2_instance" {
     aws_security_group.application.id
     ]
   user_data = <<-EOF
+  #cloud-boothook
   #! /bin/bash
   sudo apt-get update
+  export TEST="TEST"
   export DATABASE_USERNAME=${var.db_username}
   export DATABASE_PASSWORD=${var.db_password}
   export DATABASE_HOSTNAME=${aws_db_instance.mysql_db_instance.endpoint}
   export S3_BUCKET_NAME=${var.bucket_name}
   EOF
 
-  iam_instance_profile = "EC2-CSYE6225"
+  iam_instance_profile = aws_iam_instance_profile.EC2-CSYE6225.name
 
   tags = {
     Name = "csye6225-EC2"
