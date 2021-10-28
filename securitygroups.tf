@@ -2,7 +2,6 @@ resource "aws_security_group" "application" {
   name        = "application"
   description = "Allow TLS inbound traffic"
   vpc_id      = aws_vpc.vpc.id
-
   ingress = [
     {
       description      = "open 443 port to the world"
