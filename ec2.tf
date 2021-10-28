@@ -6,7 +6,7 @@ resource "aws_instance" "ec2_instance" {
     volume_size = 20
     volume_type = "gp2"
   }
-  key_name="YYH"
+  key_name  = "YYH"
   user_data = <<-EOF
   #! /bin/bash
   sudo apt-get update
@@ -16,7 +16,11 @@ resource "aws_instance" "ec2_instance" {
   export S3_BUCKET_NAME=${var.bucket_name}
   EOF
 
-   tags = {
+  iam_instance_profile = "EC2-CSYE6225"
+
+  tags = {
     Name = "csye6225-EC2"
   }
+
+
 }
