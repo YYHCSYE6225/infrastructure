@@ -7,6 +7,10 @@ resource "aws_instance" "ec2_instance" {
     volume_type = "gp2"
   }
   key_name  = "YYH"
+  subnet_id=aws_subnet.subnet["us-east-1a"].id
+  vpc_security_group_ids = [
+    aws_security_group.application.id
+    ]
   user_data = <<-EOF
   #! /bin/bash
   sudo apt-get update
