@@ -49,6 +49,20 @@ resource "aws_security_group" "application" {
     }
   ]
 
+  egress = [
+    {
+      description      = "out"
+      from_port        = 0
+      to_port          = 0
+      protocol         = "-1"
+      cidr_blocks      = [var.open_cidr_block]
+      ipv6_cidr_blocks = [var.open_ipv6_cidr_block]
+      prefix_list_ids  = []
+      security_groups  = []
+      self             = false
+    }
+  ]
+
   tags = {
     "name" = "application"
   }

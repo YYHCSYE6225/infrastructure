@@ -85,3 +85,11 @@ variable "db_password" {
 variable "ami_id" {
   type = string
 }
+
+variable "dev_domain_id" {
+  type = string
+}
+
+variable "prod_domain_id" {
+  type = string
+}
