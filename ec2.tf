@@ -7,10 +7,10 @@ resource "aws_instance" "ec2_instance" {
     volume_type = "gp2"
   }
   key_name  = "YYH"
-  subnet_id=aws_subnet.subnet["us-east-1a"].id
+  subnet_id = aws_subnet.subnet["us-east-1a"].id
   vpc_security_group_ids = [
     aws_security_group.application.id
-    ]
+  ]
   user_data = <<-EOF
   #cloud-boothook
   #! /bin/bash
@@ -22,7 +22,7 @@ resource "aws_instance" "ec2_instance" {
   export S3_BUCKET_NAME=${var.bucket_name}
   EOF
 
-  iam_instance_profile = aws_iam_instance_profile.EC2-CSYE6225.name
+  iam_instance_profile = "CodeDeployEC2ServiceRole"
 
   tags = {
     Name = "csye6225-EC2"

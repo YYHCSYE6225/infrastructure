@@ -22,9 +22,10 @@ resource "aws_db_instance" "mysql_db_instance" {
   identifier             = var.db_identifier
   username               = var.db_username
   password               = var.db_password
-  publicly_accessible    = false
+  publicly_accessible    = true
   name                   = var.db_name
   parameter_group_name   = aws_db_parameter_group.mysql_parameter_group.name
   vpc_security_group_ids = [aws_security_group.database.id]
   db_subnet_group_name   = aws_db_subnet_group.subnet_group.name
+  skip_final_snapshot    = true
 }
