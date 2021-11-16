@@ -22,7 +22,7 @@ resource "aws_instance" "ec2_instance" {
   export S3_BUCKET_NAME=${var.bucket_name}
   EOF
 
-  iam_instance_profile = "CodeDeployEC2ServiceRole"
+  iam_instance_profile = "CloudWatchAgentServerRole"
 
   tags = {
     Name = "csye6225-EC2"
