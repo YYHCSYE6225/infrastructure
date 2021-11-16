@@ -93,3 +93,7 @@ variable "dev_domain_id" {
 variable "prod_domain_id" {
   type = string
 }
+
+variable "key_name" {
+  type = string
+}
