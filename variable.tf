@@ -97,3 +97,7 @@ variable "prod_domain_id" {
 variable "key_name" {
   type = string
 }
+
+variable "ssl_arn" {
+  type = string
+}

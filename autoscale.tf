@@ -107,18 +107,24 @@ resource "aws_lb_target_group" "alb_group" {
   vpc_id   = aws_vpc.vpc.id
 }
 
+
 resource "aws_autoscaling_attachment" "asg_attachment_bar" {
   autoscaling_group_name = aws_autoscaling_group.auto_scaling_group.id
   alb_target_group_arn   = aws_lb_target_group.alb_group.arn
 }
 
-resource "aws_alb_listener" "listener_http" {
+
+resource "aws_alb_listener" "https" {
   load_balancer_arn = aws_lb.application_load_balancer.arn
-  port              = "80"
-  protocol          = "HTTP"
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = "arn:aws:acm:us-east-1:254269847591:certificate/a3559e63-d4b3-49f0-8c38-a1819e9ea60e"
 
   default_action {
     target_group_arn = aws_lb_target_group.alb_group.arn
     type             = "forward"
   }
 }
+
+
