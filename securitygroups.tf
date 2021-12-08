@@ -82,6 +82,15 @@ resource "aws_security_group_rule" "opened_to_alb" {
   security_group_id        = aws_security_group.application.id
 }
 
+resource "aws_security_group_rule" "opened_to_ssh" {
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.load_balancer.id
+  security_group_id        = aws_security_group.application.id
+}
+
 
 resource "aws_security_group" "database" {
   name        = "database"

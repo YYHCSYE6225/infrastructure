@@ -62,3 +62,6 @@ sudo bash -c 'cat>cloudwatch-config.json<<EOF
     }
 }
 EOF'
+
+#### import ssl
+aws acm import-certificate --certificate fileb://prod_joci_me.crt --certificate-chain fileb://prod_joci_me.ca-bundle --private-key fileb://CSR_PK.key
