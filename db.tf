@@ -11,6 +11,12 @@ resource "aws_db_parameter_group" "mysql_parameter_group" {
     name  = "character_set_client"
     value = "utf8"
   }
+
+    parameter {
+    name  = "performance_schema"
+    value = "1"
+    apply_method="pending-reboot"
+  }
 }
 
 resource "aws_db_instance" "mysql_db_instance" {
